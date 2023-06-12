@@ -2,15 +2,13 @@
 
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 
-import { Database } from "@/lib/database.types";
-import { useSession } from "./supabase-provider";
+import { useSession, useSupabase } from "./supabase-provider";
 
 export default function LoginForm() {
   const router = useRouter();
-  const supabase = createClientComponentClient<Database>();
+  const supabase = useSupabase();
   const session = useSession();
 
   const handleSignOff = async () => {
@@ -18,8 +16,6 @@ export default function LoginForm() {
     router.refresh();
   };
 
-  // for the `session` to be available on first SSR render, it must be
-  // fetched in a Server Component and passed down as a prop
   if (session) return <button onClick={handleSignOff}>Sign out</button>;
   return (
     <Auth
