@@ -5,7 +5,6 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 
-import type { Session } from "@supabase/auth-helpers-nextjs";
 import { Database } from "@/lib/database.types";
 import { useSession } from "./supabase-provider";
 
