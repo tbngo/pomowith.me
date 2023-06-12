@@ -1,29 +1,24 @@
 import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs";
 import { NextResponse } from "next/server";
-
 import type { NextRequest } from "next/server";
+// import type { Database } from "@/lib/database.types";
 
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
-  const supabase = createMiddlewareClient({ req, res });
+  // const { pathname } = req.nextUrl;
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const supabase = createMiddlewareClient<any>({ req, res });
+  await supabase.auth.getSession();
 
-  // // if user is signed in and the current path is / redirect the user to /account
-  // if (user && req.nextUrl.pathname === "/") {
-  //   return NextResponse.redirect(new URL("/account", req.url));
-  // }
-
-  // // if user is not signed in and the current path is not / redirect the user to /
-  // if (!user && req.nextUrl.pathname !== "/") {
-  //   return NextResponse.redirect(new URL("/", req.url));
+  // if (!session && pathname === "/") {
+  //   const url = new URL(req.url);
+  //   url.pathname = "/login";
+  //   return NextResponse.redirect(url);
   // }
 
   return res;
 }
 
-export const config = {
-  matcher: ["/"],
-};
+// export const config = {
+//   matcher: ["/"],
+// };
