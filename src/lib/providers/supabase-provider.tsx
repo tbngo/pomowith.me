@@ -7,7 +7,7 @@ import {
   createClientComponentClient,
 } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
-import { Database } from "../lib/database.types";
+import { Database } from "../database.types";
 
 type MaybeSession = Session | null;
 

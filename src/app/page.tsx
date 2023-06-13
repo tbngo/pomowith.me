@@ -1,7 +1,6 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import Image from "next/image";
-import LoginForm from "./login-form";
+import Login from "../components/Login";
 
 async function getData() {
   const supabase = createServerComponentClient({ cookies });
@@ -20,7 +19,7 @@ export default async function Home() {
             <li key={country.id}>{country.name}</li>
           ))}
         </ul>
-        <LoginForm />
+        <Login />
       </div>
     </main>
   );

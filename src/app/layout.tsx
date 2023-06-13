@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import SupabaseProvider from "./supabase-provider";
+import SupabaseProvider from "../lib/providers/supabase-provider";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
