@@ -52,7 +52,7 @@ export default function SignIn() {
               theme="dark"
               showLinks={false}
               providers={["google"]}
-              redirectTo="/auth/callback"
+              redirectTo={`${process.env.host}/auth/callback`}
               onlyThirdPartyProviders={true}
             />
           </div>

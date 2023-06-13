@@ -9,8 +9,8 @@ export default async function Room({ params }: { params: { id: string } }) {
       <Header />
       <div className="w-full max-w-5xl items-center justify-center lg:flex m-12">
         Room {params.id}
-        <Users roomId={params.id} />
       </div>
+      <Users roomId={params.id} />
     </main>
   );
 }
