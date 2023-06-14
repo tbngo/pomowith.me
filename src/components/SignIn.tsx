@@ -21,7 +21,7 @@ export default function SignIn() {
   if (session)
     return (
       <button
-        className="text-black shadow-blackA7 hover:bg-gray-100 inline-flex h-10 items-center justify-center rounded-lg bg-white px-4 font-medium leading-none shadow-[0_2px_10px] focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
+        className="text-slate-400 transition-colors hover:text-slate-300 shadow-blackA7 hover:bg-slate-950 inline-flex h-10 items-center justify-center rounded-lg bg-black px-4 font-medium leading-none shadow-[0_2px_10px] focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none"
         onClick={() => handleSignOff()}
       >
         sign out
@@ -30,13 +30,13 @@ export default function SignIn() {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button className="text-black shadow-blackA7 hover:bg-gray-100 inline-flex h-10 items-center justify-center rounded-lg bg-white px-4 font-medium leading-none shadow-[0_2px_10px] focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none">
+        <button className="text-white shadow-blackA7 hover:bg-slate-950 inline-flex h-10 items-center justify-center rounded-lg bg-black px-4 font-medium leading-none shadow-[0_2px_10px] focus:shadow-[0_0_0_2px] focus:shadow-black focus:outline-none">
           sign in
         </button>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="bg-blackA9 data-[state=open]:animate-overlayShow fixed inset-0" />
-        <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none">
+        <Dialog.Content className="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-gray-900 p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none">
           <Dialog.Title className="absolute text-8xl"></Dialog.Title>
           <div className="flex justify-center">
             <Auth
@@ -58,7 +58,7 @@ export default function SignIn() {
           </div>
           <Dialog.Close asChild>
             <button
-              className="text-gray-600 hover:bg-gray-300 focus:shadow-gray-300 absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"
+              className="text-slate-400 hover:bg-gray-800 focus:shadow-gray-300 absolute top-[10px] right-[10px] inline-flex h-[25px] w-[25px] appearance-none items-center justify-center rounded-full focus:shadow-[0_0_0_2px] focus:outline-none"
               aria-label="Close"
             >
               <Cross2Icon />

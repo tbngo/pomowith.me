@@ -14,7 +14,7 @@ const Users = ({ roomId }: { roomId: string }) => {
     const channel = supabaseClient.channel(`room-${roomId}`, {
       config: {
         presence: {
-          key: session?.user?.email ? session?.user.email : "Unknown",
+          key: session?.user?.email ?? "Unknown",
         },
       },
     });
@@ -34,7 +34,7 @@ const Users = ({ roomId }: { roomId: string }) => {
     channel.subscribe(async (status) => {
       if (status === "SUBSCRIBED") {
         const status = await channel.track({
-          user_name: session?.user?.email ? session?.user.email : "Unknown",
+          user_name: session?.user?.email ?? "Unknown",
         });
         console.log("status: ", status);
       }
