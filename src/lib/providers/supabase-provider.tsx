@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect } from "react";
 import {
   Session,
   SupabaseClient,
@@ -8,15 +8,16 @@ import {
 } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { Database } from "../database.types";
+import { MaybeSession } from "../types";
 
-type MaybeSession = Session | null;
-
-type SupabaseContext = {
+type SupabaseContextType = {
   supabase: SupabaseClient<any, string>;
   session: MaybeSession;
 };
 
-const Context = createContext<SupabaseContext | undefined>(undefined);
+const SupabaseContext = createContext<SupabaseContextType | undefined>(
+  undefined
+);
 
 export default function SupabaseProvider({
   children,
@@ -43,9 +44,9 @@ export default function SupabaseProvider({
   }, [router, supabase, session]);
 
   return (
-    <Context.Provider value={{ supabase, session }}>
+    <SupabaseContext.Provider value={{ supabase, session }}>
       <>{children}</>
-    </Context.Provider>
+    </SupabaseContext.Provider>
   );
 }
 
@@ -55,7 +56,7 @@ export const useSupabase = <
     ? "public"
     : string & keyof Database
 >() => {
-  let context = useContext(Context);
+  let context = useContext(SupabaseContext);
 
   if (context === undefined) {
     throw new Error("useSupabase must be used inside SupabaseProvider");
@@ -65,7 +66,7 @@ export const useSupabase = <
 };
 
 export const useSession = () => {
-  let context = useContext(Context);
+  let context = useContext(SupabaseContext);
 
   if (context === undefined) {
     throw new Error("useSession must be used inside SupabaseProvider");

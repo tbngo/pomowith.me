@@ -23,7 +23,9 @@ export default async function RootLayout({
   } = await supabase.auth.getSession();
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-slate-900 text-slate-400`}>
+      <body
+        className={`${inter.className} bg-slate-900 text-slate-400 font-sans`}
+      >
         <SupabaseProvider session={session}>{children}</SupabaseProvider>
       </body>
     </html>

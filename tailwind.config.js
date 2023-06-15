@@ -9,6 +9,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['circular', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+        mono: ['source code pro', 'Menlo', 'monospace'],
+      },
       colors: {
         ...mauve,
         ...violet,
@@ -28,7 +32,7 @@ module.exports = {
       animation: {
         "overlayShow": "overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
         "contentShow": "contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
-      }
+      },
     },
   },
   plugins: [],
