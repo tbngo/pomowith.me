@@ -1,5 +1,6 @@
 "use client";
 
+import { useProfile } from "@/lib/providers/profile-provider";
 import { useSupabase, useSession } from "@/lib/providers/supabase-provider";
 import { Coordinates, Task } from "@/lib/types";
 import {
@@ -15,10 +16,13 @@ import { useEffect, useState } from "react";
 
 const Realtime = ({ roomId }: { roomId: string }) => {
   const supabaseClient = useSupabase();
+  const profile = useProfile();
   const [userState, setUserState] = useState<{
     [key: string]: [{ username: string; presence_ref: string }];
   }>({});
   const session = useSession();
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [taskMessage, setTaskMessage] = useState<string>("");
 
   const [isInitialStateSynced, setIsInitialStateSynced] =
     useState<boolean>(false);
@@ -49,7 +53,7 @@ const Realtime = ({ roomId }: { roomId: string }) => {
     roomChannel.subscribe(async (status: `${REALTIME_SUBSCRIBE_STATES}`) => {
       if (status === REALTIME_SUBSCRIBE_STATES.SUBSCRIBED) {
         const resp: RealtimeChannelSendResponse = await roomChannel.track({
-          username: session?.user?.user_metadata?.name ?? "Unknown",
+          username: profile?.display_name ?? "Unknown",
         });
       }
     });
@@ -61,21 +65,20 @@ const Realtime = ({ roomId }: { roomId: string }) => {
       .filter("room_id", "eq", roomId)
       .order("created_at", { ascending: false })
       .then((resp: PostgrestResponse<Task>) => {
-        // resp.data && setMessages(resp.data.reverse());
-        // if (chatboxRef.current)
-        //   chatboxRef.current.scrollIntoView({ behavior: "smooth" });
+        setTasks(resp.data ?? []);
       });
     return () => {
       roomChannel && supabaseClient.removeChannel(roomChannel);
     };
-  }, [roomId, session, supabaseClient]);
+  }, [roomId, session, profile, supabaseClient]);
 
   return (
     <>
       <p> friends </p>
-      {Object.keys(userState).map((key) => (
-        <p key={key}>Hi {userState[key][0].username}</p>
-      ))}
+      {Object.keys(userState).map((key) => {
+        const displayName = userState[key][0].username;
+        return <p key={key}>Hi {displayName}</p>;
+      })}
     </>
   );
 };
