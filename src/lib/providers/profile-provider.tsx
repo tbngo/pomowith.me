@@ -24,6 +24,7 @@ export default function ProfileProvider({
           .from("profiles")
           .select("*")
           .eq("id", session?.user.id)
+          .limit(1)
           .single();
         if (error) {
           console.error("Error fetching profile", error);
