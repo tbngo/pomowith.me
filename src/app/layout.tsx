@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import SupabaseProvider from "../lib/providers/supabase-provider";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import ProfileProvider from "@/lib/providers/profile-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,7 +27,9 @@ export default async function RootLayout({
       <body
         className={`${inter.className} bg-slate-900 text-slate-400 font-sans`}
       >
-        <SupabaseProvider session={session}>{children}</SupabaseProvider>
+        <SupabaseProvider session={session}>
+          <ProfileProvider session={session}>{children}</ProfileProvider>
+        </SupabaseProvider>
       </body>
     </html>
   );
