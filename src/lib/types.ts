@@ -12,4 +12,9 @@ export interface Task {
   created_at: Date;
 }
 
+export interface Profile {
+  id: string;
+  display_name: string | null;
+}
+
 export type MaybeSession = Session | null;
