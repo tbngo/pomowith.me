@@ -2,7 +2,7 @@
 
 import { useProfile } from "@/lib/providers/profile-provider";
 import { useSupabase, useSession } from "@/lib/providers/supabase-provider";
-import { Coordinates, Task } from "@/lib/types";
+import { Coordinates, TaskType } from "@/lib/types";
 import {
   PostgrestResponse,
   REALTIME_LISTEN_TYPES,
@@ -21,8 +21,6 @@ const Realtime = ({ roomId }: { roomId: string }) => {
     [key: string]: [{ username: string; presence_ref: string }];
   }>({});
   const session = useSession();
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [taskMessage, setTaskMessage] = useState<string>("");
 
   const [isInitialStateSynced, setIsInitialStateSynced] =
     useState<boolean>(false);
@@ -59,16 +57,6 @@ const Realtime = ({ roomId }: { roomId: string }) => {
         });
       }
     });
-
-    // Get the room's existing tasks that were saved to database
-    supabaseClient
-      .from("tasks")
-      .select("id, user_id, task, created_at")
-      .filter("room_id", "eq", roomId)
-      .order("created_at", { ascending: false })
-      .then((resp: PostgrestResponse<Task>) => {
-        setTasks(resp.data ?? []);
-      });
     return () => {
       roomChannel && supabaseClient.removeChannel(roomChannel);
     };
