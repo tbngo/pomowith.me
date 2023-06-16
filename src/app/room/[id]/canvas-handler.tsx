@@ -64,16 +64,17 @@ export const CanvasHandler = ({ roomId }: CanvasHandlerProps) => {
     }
   };
   return (
-    <div
-      className="absolute h-full w-full left-0 top-0"
-      style={{
-        opacity: 0.04,
-        backgroundSize: "30px 30px",
-        backgroundImage:
-          "radial-gradient(circle, white 1px, rgba(0, 0, 0, 0) 1px)",
-      }}
-      onClick={(event: any) => handleDoubleClickOnCanvas(event)}
-    >
+    <div>
+      <div
+        className="absolute h-full w-full left-0 top-0 z-0"
+        style={{
+          opacity: 0.04,
+          backgroundSize: "30px 30px",
+          backgroundImage:
+            "radial-gradient(circle, white 1px, rgba(0, 0, 0, 0) 1px)",
+        }}
+        onClick={(event: any) => handleDoubleClickOnCanvas(event)}
+      />
       {tasks.map((task) => (
         <Task key={task.id} thisTask={task} />
       ))}

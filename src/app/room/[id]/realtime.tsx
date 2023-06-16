@@ -2,7 +2,7 @@
 
 import { useProfile } from "@/lib/providers/profile-provider";
 import { useSupabase, useSession } from "@/lib/providers/supabase-provider";
-import { Coordinates, TaskType } from "@/lib/types";
+import { Coordinates } from "@/lib/types";
 import {
   PostgrestResponse,
   REALTIME_LISTEN_TYPES,

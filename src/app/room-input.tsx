@@ -7,7 +7,7 @@ export const RoomInput = () => {
   return (
     <input
       type="text"
-      placeholder="Enter a room name"
+      placeholder="enter a room name 👻"
       className="shadow appearance-none bg-black text-sm rounded w-96 py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
       onKeyDown={(e) => {
         if (e.code !== "Enter" || !e.currentTarget.value) return;
