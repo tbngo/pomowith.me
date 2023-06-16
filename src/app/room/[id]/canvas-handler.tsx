@@ -37,6 +37,7 @@ export const CanvasHandler = ({ roomId }: CanvasHandlerProps) => {
     [roomId, supabase]
   );
 
+  // todo: create event listeners for new tasks in db
   const handleDoubleClickOnCanvas = async (event: MouseEvent) => {
     if (!session) return;
     const { detail: clicks, pageX, pageY } = event;
