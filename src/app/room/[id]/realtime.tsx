@@ -27,6 +27,8 @@ const Realtime = ({ roomId }: { roomId: string }) => {
   const [isInitialStateSynced, setIsInitialStateSynced] =
     useState<boolean>(false);
 
+  // These states will be managed via ref as they're mutated within event listeners
+
   const [mousePosition, _setMousePosition] = useState<Coordinates>();
 
   useEffect(() => {

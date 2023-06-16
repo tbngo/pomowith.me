@@ -19,13 +19,14 @@ export default function ProfileProvider({
 
   useEffect(
     function fetchAndSetProfile() {
+      if (!session || !session.user.id) return;
       const fetchProfile = async () => {
+        console.log(session.user.id);
         const { data: profile, error } = await supabase
           .from("profiles")
           .select("*")
-          .eq("id", session?.user.id)
-          .limit(1)
-          .single();
+          .eq("id", session.user.id)
+          .maybeSingle();
         if (error) {
           console.error("Error fetching profile", error);
           throw new Error(error.message);

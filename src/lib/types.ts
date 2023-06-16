@@ -5,11 +5,14 @@ export interface Coordinates {
   y: number | undefined;
 }
 
-export interface Task {
+export interface TaskType {
   id: number;
   user_id: string;
   task: string;
   created_at: Date;
+  x: number;
+  y: number;
+  room_id: string;
 }
 
 export interface Profile {
